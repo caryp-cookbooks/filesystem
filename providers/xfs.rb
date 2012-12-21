@@ -1,7 +1,6 @@
 action :create do
 
   # settings 
-  # TODO: turn this into the resource interface
   mount_point = new_resource.mount_point
   fstype = new_resource.fstype 
   raise "Only fstype == 'xfs' is supported with this provider" unless fstype == "xfs"
@@ -34,9 +33,8 @@ w
   end
   
   # format the parition
-#  execute "/sbin/mkfs.xfs -L #{volume_label} #{partition_path}" do
   execute "mkfs.xfs #{partition_path}" do
-    not_if "/usr/sbin/xfsdump -I #{partition_path}"
+    not_if "mount | grep #{partition}"
   end
   
   # make sure mount point exists

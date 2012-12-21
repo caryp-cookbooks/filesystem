@@ -1,7 +1,6 @@
 action :create do
 
   # settings 
-  # TODO: turn this into the resource interface
   mount_point = new_resource.mount_point
   fstype = new_resource.fstype 
   volume_label = new_resource.volume_label
